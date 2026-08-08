@@ -228,7 +228,7 @@ body{
 
 .hero-text h1{
 
-    font-size:65px;
+    font-size:60px;
     line-height:1.15;
 
     color:#434344;
@@ -237,6 +237,14 @@ body{
 
     font-weight:700;
 
+}
+.hero-text h1 .h1-small{
+    display:block;
+    font-size:0.55em;
+    line-height:1.1;
+    margin-bottom:8px;
+    font-weight:700;
+    color: #c1820f;
 }
 
 .hero-text h3{
@@ -380,6 +388,11 @@ body{
 .hero-face{
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
+}
+.h1-small {
+    font-size: 0.65em;
+    display: block;
+    line-height: 1.1;
 }
 
 
@@ -551,26 +564,6 @@ body{
 
     font-weight:600;
 
-}
-
-.slider-btn{
-
-    display:none;
-
-    width:48px;
-    height:48px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#111;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    font-size:18px;
 }
 
 /* --- Services Section CTA --- */
@@ -768,6 +761,116 @@ body{
     display:none;
 
 }
+
+/* =========================================================
+   FAQ / Q&A
+========================================================= */
+
+.faq-section{
+    padding:100px 8%;
+    background:#fff;
+}
+
+.faq-container{
+    max-width:900px;
+    margin:auto;
+}
+
+.faq-header{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.faq-header span{
+    color:#D4AF37;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:3px;
+}
+
+.faq-header h2{
+    font-size:48px;
+    margin:18px 0;
+    color:#111;
+}
+
+.faq-header p{
+    color:#666;
+    font-size:17px;
+    line-height:1.8;
+}
+
+.faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.faq-item{
+    border:1px solid #e5e5e5;
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.faq-question{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:22px 25px;
+
+    background:#fff;
+    border:none;
+
+    color:#111;
+
+    font-family:'Poppins',sans-serif;
+    font-size:16px;
+    font-weight:600;
+
+    text-align:left;
+
+    cursor:pointer;
+}
+
+.faq-question i{
+    color:#D4AF37;
+    font-size:16px;
+
+    transition:.3s ease;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+
+    transition:max-height .35s ease;
+}
+
+.faq-answer p{
+    padding:0 25px 22px;
+
+    color:#666;
+    font-size:15px;
+    line-height:1.8;
+}
+
+.faq-item.active .faq-answer{
+    max-height:200px;
+}
+
+.faq-item.active .faq-question i{
+    transform:rotate(45deg);
+}
+
+.faq-item.active{
+    border-color:#D4AF37;
+}
+
+
 
 
 /* =========================================================
@@ -1003,57 +1106,255 @@ body{
     color:#111;
 
 }
+.service-select {
+    margin-top: 5px;
+}
 
+.service-select > label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+
+/* Service options grid */
+
+.service-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+/* Individual service */
+
+.service-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+/* Hide default checkbox */
+
+.service-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Service box */
+
+.service-option span {
+    width: 100%;
+    padding: 13px 15px;
+
+    background: #f7f7f7;
+
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* Hover */
+
+.service-option:hover span {
+    border-color: #D4AF37;
+    background: #fffdf5;
+    transform: translateY(-1px);
+}
+
+
+/* Selected service */
+
+.service-option input:checked + span {
+    background: #111;
+    color: #fff;
+
+    border-color: #D4AF37;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Small check mark */
+
+.service-option input:checked + span::before {
+    content: "✓";
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    margin-right: 9px;
+
+    background: #D4AF37;
+    color: #111;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: 900;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .service-options {
+        grid-template-columns: 1fr;
+    }
+
+}
 
 /* =========================================================
-   WHATSAPP FLOATING BUTTON
+   CONTACT US FLOATING BUTTON
 ========================================================= */
 
-
-.whatsapp{
-
+.contact-float{
     position:fixed;
-
     right:25px;
-
     bottom:25px;
+    z-index:9999;
+}
 
+/* Main Button */
 
-    width:65px;
-
-    height:65px;
-
-
-    background:#25D366;
-
-    color:white;
-
-    border-radius:50%;
-
+.contact-float-btn{
 
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    background:#ffffff;
+    color:#16a34a;
+
+    border:2px solid #16a34a;
+    border-radius:50px;
+
+    padding:14px 22px;
+
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+    transition:.3s ease;
+}
+
+.contact-float-btn i{
+    font-size:17px;
+}
+
+.contact-float-btn:hover{
+
+    background:#16a34a;
+    color:#ffffff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(22,163,74,.30);
+}
 
 
-    font-size:35px;
+/* Popup Menu */
+
+.contact-float-menu{
+
+    position:absolute;
+
+    right:0;
+    bottom:65px;
+
+    width:180px;
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    padding:10px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.3s ease;
+}
 
 
-    z-index:999;
+/* Show Menu */
 
+.contact-float-menu.active{
 
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    opacity:1;
+    visibility:visible;
 
-    transition:.3s;
+    transform:translateY(0);
 
 }
 
 
-.whatsapp:hover{
+/* Call / Message Buttons */
 
-    transform:scale(1.1);
+.contact-float-menu a{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 14px;
+
+    color:#222;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    font-size:14px;
+    font-weight:500;
+
+    transition:.25s ease;
+}
+
+.contact-float-menu a i{
+
+    width:22px;
+
+    color:#16a34a;
+
+    font-size:17px;
+}
+
+.contact-float-menu a:hover{
+
+    background:#f0fdf4;
+
+    color:#16a34a;
 
 }
 
@@ -1443,7 +1744,7 @@ body{
 
     text-align:center;
 
-    padding:100px 6% 50px;
+    padding:50px 6% 50px;
 
     gap:20px;
 
@@ -1607,69 +1908,6 @@ scroll-snap-align:center;
 
 }
 
-
-/* Arrows */
-
-.slider-btn{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-position:absolute;
-
-top:45%;
-
-transform:translateY(-50%);
-
-width:44px;
-
-height:44px;
-
-border:none;
-
-border-radius:50%;
-
-background:rgba(0,0,0,.25);
-
-backdrop-filter:blur(10px);
-
-color:#fff;
-
-font-size:18px;
-
-cursor:pointer;
-
-z-index:100;
-
-transition:.3s;
-
-}
-
-.slider-btn:hover{
-
-background:rgba(0,0,0,.45);
-
-}
-
-.prev{
-
-left:12px;
-
-}
-
-.next{
-
-right:12px;
-
-
-
-margin-bottom:35px;
-
-}
-
 /* Services CTA - mobile */
 
 .services-cta{
@@ -1802,6 +2040,23 @@ right:10px;
 
 }
 
+/* ---reeeeeeeeeeeeeeeeeeeeeeeeeeeeview --- */
+ .faq-section{
+        padding:70px 6%;
+    }
+
+    .faq-header h2{
+        font-size:34px;
+    }
+
+    .faq-question{
+        padding:18px;
+        font-size:15px;
+    }
+
+    .faq-answer p{
+        padding:0 18px 18px;
+    }
     /* --- Contact / Quote --- */
 
 .contact{
@@ -1817,6 +2072,9 @@ right:10px;
 
     gap:35px;
 }
+ .service-options{
+        grid-template-columns:1fr;
+    }
 
 .quote-box{
 
@@ -2021,6 +2279,18 @@ right:10px;
     font-size:13px;
 
 }
+.contact-float{
 
+        right:18px;
+        bottom:18px;
 
+    }
+
+    .contact-float-btn{
+
+        padding:12px 18px;
+
+        font-size:13px;
+
+    }
 }
