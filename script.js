@@ -13,47 +13,6 @@ menuBtn.addEventListener("click", () => {
 
 
 /* =========================================================
-   SERVICES SLIDER
-========================================================= */
-
-const slider = document.querySelector(".services-grid");
-const next = document.querySelector(".next");
-const prev = document.querySelector(".prev");
-
-if (slider && next && prev) {
-
-    next.addEventListener("click", () => {
-
-        const card = slider.querySelector(".service-card");
-
-        slider.scrollBy({
-
-            left: card.offsetWidth + 18,
-
-            behavior: "smooth"
-
-        });
-
-    });
-
-    prev.addEventListener("click", () => {
-
-        const card = slider.querySelector(".service-card");
-
-        slider.scrollBy({
-
-            left: -(card.offsetWidth + 18),
-
-            behavior: "smooth"
-
-        });
-
-    });
-
-}
-
-
-/* =========================================================
    REVIEWS SLIDER
 ========================================================= */
 
@@ -151,47 +110,64 @@ if (reviewsGrid && reviewNext && reviewPrev) {
     startAutoSlide();
 
 }
-
-
 /* =========================================================
    CONTACT / QUOTE FORM -> WHATSAPP
 ========================================================= */
 
 const quoteForm = document.getElementById("quoteForm");
 
-if(quoteForm){
+if (quoteForm) {
 
-    quoteForm.addEventListener(
-    "submit",
-    function(e){
+    quoteForm.addEventListener("submit", function(e) {
 
         e.preventDefault();
 
+
         const name =
-        document.getElementById("name").value;
+            document.getElementById("name").value;
 
         const phone =
-        document.getElementById("phone").value;
+            document.getElementById("phone").value;
 
         const email =
-        document.getElementById("email").value;
-
-        const service =
-        document.getElementById("service").value;
+            document.getElementById("email").value;
 
         const message =
-        document.getElementById("message").value;
+            document.getElementById("message").value;
+
+
+        /* GET SELECTED SERVICES */
+
+        const selectedServices =
+            Array.from(
+                document.querySelectorAll(
+                    'input[name="services"]:checked'
+                )
+            ).map(function(checkbox) {
+                return checkbox.value;
+            });
+
+
+        /* IF NO SERVICE SELECTED */
+
+        const service =
+            selectedServices.length > 0
+                ? selectedServices.join(", ")
+                : "Not specified";
 
 
         // TM11 Construction WhatsApp Number
-        // Format: country code + number, NO +, spaces, or brackets
-        const whatsappNumber =
-        "61451160058";
+        // Format: country code + number
+        // NO +, spaces, or brackets
 
+        const whatsappNumber =
+            "61451160058";
+
+
+        /* WHATSAPP MESSAGE */
 
         const text =
 `New Quote Request - TM11 Construction
-
 
 Name: ${name}
 
@@ -199,19 +175,22 @@ Phone: ${phone}
 
 Email: ${email}
 
-Service: ${service}
+Services: ${service}
 
 Project Details:
-${message}
-`;
+${message}`;
 
+
+        /* WHATSAPP URL */
 
         const whatsappURL =
-        "https://wa.me/"
-        + whatsappNumber
-        + "?text="
-        + encodeURIComponent(text);
+            "https://wa.me/"
+            + whatsappNumber
+            + "?text="
+            + encodeURIComponent(text);
 
+
+        /* OPEN WHATSAPP */
 
         window.open(
             whatsappURL,
@@ -221,8 +200,6 @@ ${message}
     });
 
 }
-
-
 /* =========================================================
    HERO FLIP CARD
 ========================================================= */
@@ -248,3 +225,79 @@ if(heroFlip){
     heroFlip.addEventListener("click", flipHero);
 
 }
+
+/* =========================================================
+   CONTACT US FLOATING BUTTON
+========================================================= */
+
+const contactFloatBtn =
+    document.getElementById("contactFloatBtn");
+
+const contactFloatMenu =
+    document.getElementById("contactFloatMenu");
+
+if(contactFloatBtn && contactFloatMenu){
+
+    contactFloatBtn.addEventListener("click", function(e){
+
+        e.stopPropagation();
+
+        contactFloatMenu.classList.toggle("active");
+
+    });
+
+
+    document.addEventListener("click", function(){
+
+        contactFloatMenu.classList.remove("active");
+
+    });
+
+
+    contactFloatMenu.addEventListener("click", function(e){
+
+        e.stopPropagation();
+
+    });
+
+}
+
+/* =========================================================
+   FAQ ACCORDION
+========================================================= */
+
+const faqQuestions =
+    document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(function(question){
+
+    question.addEventListener("click", function(){
+
+        const currentItem =
+            question.parentElement;
+
+        const isActive =
+            currentItem.classList.contains("active");
+
+
+        /* Close all other questions */
+
+        document.querySelectorAll(".faq-item")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+
+        /* Open clicked question */
+
+        if(!isActive){
+
+            currentItem.classList.add("active");
+
+        }
+
+    });
+
+});
