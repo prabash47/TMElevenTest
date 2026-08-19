@@ -1,6 +1,6 @@
-/* =========================================================
-   NAVBAR / MOBILE MENU TOGGLE
-========================================================= */
+// =========================================================
+// NAVIGATION / MOBILE MENU TOGGLE
+// =========================================================
 
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
@@ -12,9 +12,92 @@ menuBtn.addEventListener("click", () => {
 });
 
 
-/* =========================================================
-   REVIEWS SLIDER
-========================================================= */
+// =========================================================
+// NAVBAR — SERVICES DROPDOWN
+// =========================================================
+
+const servicesDropdown = document.getElementById("servicesDropdown");
+const dropdownArrow = document.getElementById("dropdownArrow");
+
+if (servicesDropdown && dropdownArrow) {
+
+    function toggleDropdown() {
+
+        const isOpen = servicesDropdown.classList.toggle("open");
+
+        dropdownArrow.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+    }
+
+    function closeDropdown() {
+
+        servicesDropdown.classList.remove("open");
+
+        dropdownArrow.setAttribute("aria-expanded", "false");
+
+    }
+
+    dropdownArrow.addEventListener("click", function(e) {
+
+        e.stopPropagation();
+
+        toggleDropdown();
+
+    });
+
+    /* Close dropdown when clicking outside of it */
+
+    document.addEventListener("click", function(e) {
+
+        if (!servicesDropdown.contains(e.target)) {
+
+            closeDropdown();
+
+        }
+
+    });
+
+    /* Keep dropdown state clean when the mobile menu is closed */
+
+    if (menuBtn) {
+
+        menuBtn.addEventListener("click", closeDropdown);
+
+    }
+
+}
+
+
+// =========================================================
+// HERO FLIP CARD
+// =========================================================
+
+const heroFlip = document.getElementById("heroFlip");
+
+if (heroFlip) {
+
+    let flipped = false;
+
+    function flipHero() {
+
+        flipped = !flipped;
+
+        heroFlip.classList.toggle("flipped", flipped);
+
+    }
+
+    // Auto Flip every 5 seconds
+    setInterval(flipHero, 5000);
+
+    // Click Flip
+    heroFlip.addEventListener("click", flipHero);
+
+}
+
+
+// =========================================================
+// REVIEWS SLIDER
+// =========================================================
 
 const reviewsGrid = document.querySelector(".reviews-grid");
 const reviewNext = document.querySelector(".review-next");
@@ -110,9 +193,52 @@ if (reviewsGrid && reviewNext && reviewPrev) {
     startAutoSlide();
 
 }
-/* =========================================================
-   CONTACT / QUOTE FORM -> WHATSAPP
-========================================================= */
+
+
+// =========================================================
+// FAQ ACCORDION
+// =========================================================
+
+const faqQuestions =
+    document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach(function(question) {
+
+    question.addEventListener("click", function() {
+
+        const currentItem =
+            question.parentElement;
+
+        const isActive =
+            currentItem.classList.contains("active");
+
+
+        /* Close all other questions */
+
+        document.querySelectorAll(".faq-item")
+        .forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+        /* Open clicked question */
+
+        if (!isActive) {
+
+            currentItem.classList.add("active");
+
+        }
+
+    });
+
+});
+
+
+// =========================================================
+// CONTACT / QUOTE FORM -> WHATSAPP
+// =========================================================
 
 const quoteForm = document.getElementById("quoteForm");
 
@@ -200,35 +326,11 @@ ${message}`;
     });
 
 }
-/* =========================================================
-   HERO FLIP CARD
-========================================================= */
 
-const heroFlip = document.getElementById("heroFlip");
 
-if(heroFlip){
-
-    let flipped = false;
-
-    function flipHero(){
-
-        flipped = !flipped;
-
-        heroFlip.classList.toggle("flipped", flipped);
-
-    }
-
-    // Auto Flip every 5 seconds
-    setInterval(flipHero, 5000);
-
-    // Click Flip
-    heroFlip.addEventListener("click", flipHero);
-
-}
-
-/* =========================================================
-   CONTACT US FLOATING BUTTON
-========================================================= */
+// =========================================================
+// CONTACT US FLOATING BUTTON
+// =========================================================
 
 const contactFloatBtn =
     document.getElementById("contactFloatBtn");
@@ -236,68 +338,65 @@ const contactFloatBtn =
 const contactFloatMenu =
     document.getElementById("contactFloatMenu");
 
-if(contactFloatBtn && contactFloatMenu){
+if (contactFloatBtn && contactFloatMenu) {
 
-    contactFloatBtn.addEventListener("click", function(e){
+    function openContactFloat() {
 
-        e.stopPropagation();
+        contactFloatMenu.classList.add("active");
 
-        contactFloatMenu.classList.toggle("active");
+        contactFloatBtn.setAttribute("aria-expanded", "true");
 
-    });
+    }
 
-
-    document.addEventListener("click", function(){
+    function closeContactFloat() {
 
         contactFloatMenu.classList.remove("active");
 
-    });
+        contactFloatBtn.setAttribute("aria-expanded", "false");
 
+    }
 
-    contactFloatMenu.addEventListener("click", function(e){
+    contactFloatBtn.addEventListener("click", function(e) {
 
         e.stopPropagation();
 
-    });
+        if (contactFloatMenu.classList.contains("active")) {
 
-}
+            closeContactFloat();
 
-/* =========================================================
-   FAQ ACCORDION
-========================================================= */
+        } else {
 
-const faqQuestions =
-    document.querySelectorAll(".faq-question");
-
-faqQuestions.forEach(function(question){
-
-    question.addEventListener("click", function(){
-
-        const currentItem =
-            question.parentElement;
-
-        const isActive =
-            currentItem.classList.contains("active");
-
-
-        /* Close all other questions */
-
-        document.querySelectorAll(".faq-item")
-        .forEach(function(item){
-
-            item.classList.remove("active");
-
-        });
-
-
-        /* Open clicked question */
-
-        if(!isActive){
-
-            currentItem.classList.add("active");
+            openContactFloat();
 
         }
 
     });
 
-});
+
+    document.addEventListener("click", function() {
+
+        closeContactFloat();
+
+    });
+
+
+    contactFloatMenu.addEventListener("click", function(e) {
+
+        e.stopPropagation();
+
+    });
+
+
+    /* Close on Escape key for keyboard accessibility */
+
+    document.addEventListener("keydown", function(e) {
+
+        if (e.key === "Escape") {
+
+            closeContactFloat();
+
+        }
+
+    });
+
+}
