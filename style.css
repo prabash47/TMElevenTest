@@ -366,10 +366,10 @@ body {
 .hero-btn {
     display: inline-block;
 
-    background: #ffffff;
-    color: #110A38;
+    background: #ef2828;
+    color: #ffffff;
 
-    border: 2px solid #110A38;
+    border: 2px solid #fcfcfd;
 
     text-decoration: none;
 
